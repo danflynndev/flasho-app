@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 
 export const Navbar = (props) => {
-    const { setToken } = props;
+    const { setToken, clearToken } = props;
     const navigate = useNavigate()
 
     const [anchorElNav, setAnchorElNav] = useState(null);
@@ -23,8 +23,7 @@ export const Navbar = (props) => {
     }
 
     const handleLogout = () => {
-        setToken()
-        navigate('/')
+        clearToken();
     }
 
     const handleNavigate = (e) => {
@@ -75,6 +74,9 @@ export const Navbar = (props) => {
                     </MenuItem>
                     <MenuItem onClick={(e)=>handleMenuItemClick(e, handleNavigate)}>
                         <Typography id='create'>Create Deck</Typography>
+                    </MenuItem>
+                    <MenuItem onClick={(e)=>handleMenuItemClick(e, handleNavigate)}>
+                        <Typography id='edit'>Edit Deck</Typography>
                     </MenuItem>
                 </Menu>
               </Box>

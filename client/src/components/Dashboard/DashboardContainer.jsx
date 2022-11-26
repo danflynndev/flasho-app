@@ -2,6 +2,7 @@ import jwt_decode from "jwt-decode";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import useToken from "../../hooks/useToken"
 import { Dashboard } from "./Dashboard"
 
 const emptyDeckData = {
@@ -21,15 +22,17 @@ const emptyDeckData = {
 }
 
 
-export const DashboardContainer = () => {
+export const DashboardContainer = (props) => {
+    const { user } = props;
     const navigate = useNavigate();
-    const [token, setToken] = useState(JSON.parse(localStorage.getItem('token')));
-    const [user, setUser] = useState(jwt_decode(token));
+    // const {token, setToken} = useToken();
+    // const [token, setToken] = useState(JSON.parse(localStorage.getItem('token')));
+    // const [user, setUser] = useState(jwt_decode(token));
     const [isLoading, setIsLoading] = useState(false);
     const [deckData, setDeckData] = useState(emptyDeckData);
 
 
-    console.log(deckData, 'dashboard')
+    console.log(user, deckData, 'dashboard')
     useEffect(() => {
         setIsLoading(true)
 
@@ -43,7 +46,7 @@ export const DashboardContainer = () => {
         fetchData()
         .catch(console.error)
     
-    }, [user])
+    }, [])
     
     
 

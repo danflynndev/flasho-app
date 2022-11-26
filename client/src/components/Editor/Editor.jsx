@@ -1,11 +1,11 @@
-import { useState } from "react";
-import jwt_decode from "jwt-decode";
+import { useEffect, useState } from "react";
 import { Button, Fab, Paper, TextField, Typography } from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
 import { Stack } from "@mui/system"
 import { EditCard } from "./EditCard";
 import { EditQuestion } from "./EditQuestion";
 import useToken from "../../hooks/useToken";
+import { useLocation } from "react-router-dom";
 
 // factory functions required here to avoid pass-by-reference issues with the objects :)
 const blankQAs = () => {
@@ -24,14 +24,23 @@ const blankCard = () => {
 }
 
 export const Editor = (props) => {
-    const [token, setToken] = useState(JSON.parse(localStorage.getItem('token')))
 
-    const [user, setUser] = useState(jwt_decode(token));
-console.log(user);
+    const { user, mode } = props;
+    const location = useLocation();
+    const deck = location.state.deck;
+
+    const { token } = useToken();
+
     const [form, setForm] = useState({
         title: '',
         cards: [blankCard()]
     });
+
+    useEffect(() => {
+        if (mode === 'edit') {
+            setForm(deck)
+        }
+    }, [deck])
 
     const addCard = () => {
         const data = [...form.cards, blankCard()]

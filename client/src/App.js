@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import useToken from './hooks/useToken';
 
 import logo from './logo.svg';
@@ -13,25 +13,48 @@ import { Editor } from './components/Editor/Editor';
 import { Login } from './components/Login/Login';
 import { createTheme } from '@mui/material/styles';
 import { baseTheme } from './theme';
+import { RequireAuth } from './components/RequireAuth/RequireAuth';
+
+const emptyUser = {
+  email: '',
+  id: '',
+  iat: 0,
+  exp: 0,
+}
 
 function App() {
 
   const theme = createTheme(baseTheme)
   
 
-  const { token, setToken } = useToken((localStorage.getItem('token')));
+  const { token, setToken, clearToken } = useToken();
+  // const [user, setUser] = useState({...emptyUser})
+
 
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme} >
         <CssBaseline>
-          <Navbar setToken={setToken}/>
+          <Navbar setToken={setToken} clearToken={clearToken}/>
           <Container>
             <Toolbar />
             <Routes>
-              <Route path="/" exact element={!token ? <Login setToken={setToken} /> : <Navigate to='/dashboard' replace /> } />
-              <Route path="/dashboard" exact element={<DashboardContainer />} />
-              <Route path="/create" exact element={<Editor />} />
+              <Route path="/" exact element={<Login setToken={setToken} /> } />
+              <Route path="/dashboard" exact element={
+                <RequireAuth token={token}>
+                  <DashboardContainer />
+                </RequireAuth>
+              } />
+              <Route path="/create" exact element={
+                <RequireAuth token={token}>
+                  <Editor mode="create" />
+                </RequireAuth>
+              } />
+              <Route path="/edit" element={
+                <RequireAuth token={token}>
+                  <Editor mode="edit" />
+                </RequireAuth>
+              } />
             </Routes>
           </Container>
         </CssBaseline>

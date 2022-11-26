@@ -14,18 +14,18 @@ export default function useToken() {
     const [token, setToken] = useState(getToken());
 
     const saveToken = (userToken) => {
-        if (userToken) {
-            localStorage.setItem('token', JSON.stringify( userToken.token ))
-            setToken(userToken.token);
-        } else {
-            // by passing nothing to the setToken hook, triggers a log out.
-            localStorage.clear();
-            setToken('')
-        }
+        localStorage.setItem('token', JSON.stringify( userToken ))
+        setToken(userToken.token);
       }
+
+    const clearToken = () => {
+        localStorage.removeItem('token');
+        setToken(getToken())
+    }
     
     return {
         setToken: saveToken,
+        clearToken: clearToken,
         token
     }
 }

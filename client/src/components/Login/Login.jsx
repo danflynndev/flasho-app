@@ -1,10 +1,13 @@
 import { Box, Button, Container, Paper, TextField } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import useToken from "../../hooks/useToken";
 
 
 export const Login = (props) => {
+    const navigate = useNavigate();
+    const { state } = useLocation();
     const { setToken } = props;
     const [form, setForm] = useState({
         name: '',
@@ -39,6 +42,7 @@ export const Login = (props) => {
         })
         .then(response => response.json())
         .then(data => {console.log(data, 'from fetch');setToken(data)})
+        .then(()=> navigate(state?.path || '/dashboard'))
     }
 
     return (
