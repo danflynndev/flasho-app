@@ -1,9 +1,8 @@
-import { Box, Button, Container, Paper, TextField } from "@mui/material";
-import { Stack } from "@mui/system";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import useToken from "../../hooks/useToken";
 
+import { Button, Container, Paper, TextField } from "@mui/material";
+import { Stack } from "@mui/system";
 
 export const Login = (props) => {
     const navigate = useNavigate();
@@ -15,25 +14,33 @@ export const Login = (props) => {
         password: ''
     })
 
+    // enables one-click guest login
+    useEffect(() => {
+        if (form.email === 'guest@gmail.com') {
+            const evt = new SubmitEvent('submit');
+            handleSubmit(evt)
+        }
+    }, [form])
+
     const handleChange = (e) => {
         const value = e.target.value;
         setForm({...form, [e.target.name]: value});
     }
 
-    const handleClickGuest = (e) => {
+    const handleClickGuest = async (e) => {
         e.preventDefault();
         setForm({
             name: 'Guest',
             email: 'guest@gmail.com',
             password: 'guest'
         });
+
     }
-        
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const result = await fetch('/user/signin', {
+        console.log('submit fired', form)
+        await fetch('/user/signin', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
@@ -46,7 +53,15 @@ export const Login = (props) => {
     }
 
     return (
-        <Container component='main'>
+        <Container 
+            component='main'
+            sx={{
+                display: 'flex',
+                justifyContent:'center',
+                alignItems: 'center',
+                height: '80vh',
+            }}
+        >
             <Paper elevation={5}>
                 <form onSubmit={handleSubmit}>
                     <Stack spacing={2}>
@@ -78,7 +93,6 @@ export const Login = (props) => {
                         <Button variant='outlined' onClick={handleClickGuest} value='guest'>Use Guest Credentials</Button>
                     </Stack>
                 </form>
-
             </Paper>
         </Container>
     )

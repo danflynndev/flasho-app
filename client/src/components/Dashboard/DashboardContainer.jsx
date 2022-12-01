@@ -1,19 +1,16 @@
-import jwt_decode from "jwt-decode";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import useToken from "../../hooks/useToken"
+import { useEffect, useState } from "react";
 import { Dashboard } from "./Dashboard"
+import { Spinner } from "../Spinner/Spinner";
 
 const emptyDeckData = {
     decks: [{
-        _id: 0,
+        _id: '',
         title: '',
         cards: [{
-            _id: 0,
+            _id: '',
             title: '',
             qas:[{
-                _id: 0,
+                _id: '',
                 q: '',
                 a: ''
             }]
@@ -24,15 +21,9 @@ const emptyDeckData = {
 
 export const DashboardContainer = (props) => {
     const { user } = props;
-    const navigate = useNavigate();
-    // const {token, setToken} = useToken();
-    // const [token, setToken] = useState(JSON.parse(localStorage.getItem('token')));
-    // const [user, setUser] = useState(jwt_decode(token));
     const [isLoading, setIsLoading] = useState(false);
     const [deckData, setDeckData] = useState(emptyDeckData);
 
-
-    console.log(user, deckData, 'dashboard')
     useEffect(() => {
         setIsLoading(true)
 
@@ -46,11 +37,9 @@ export const DashboardContainer = (props) => {
         fetchData()
         .catch(console.error)
     
-    }, [])
-    
-    
+    }, [user.id])
 
     return (
-        isLoading ? <p>Loading</p> : <Dashboard deckData={deckData} />
+        isLoading ? <Spinner /> : <Dashboard deckData={deckData} />
     )
 }

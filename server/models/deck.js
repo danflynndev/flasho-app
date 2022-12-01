@@ -31,28 +31,26 @@ const CardSchema = new Schema({
     qas: [QASchema]
 })
 
-const DeckSchema = mongoose.Schema({
+const DeckObjSchema = new Schema({
+    title: {
+        type: String,
+        required: true,
+        maxLength: 60
+    },
+    desc: {
+        type: String,
+        required: true,
+        maxLength: 140
+    },
+    cards: [CardSchema]
+})
+
+const DeckSchema = new Schema({
     user_id: {
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    decks: [{
-        _id: {
-            type: Number,
-            default: 0
-        },
-        title: {
-            type: String,
-            required: true,
-            maxLength: 60
-        },
-        desc: {
-            type: String,
-            required: true,
-            maxLength: 140
-        },
-        cards: [CardSchema]
-    }]
+    decks: [DeckObjSchema]
 });
 
 module.exports = mongoose.model('Deck', DeckSchema); 

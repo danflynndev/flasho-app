@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
-import { Button, Box, List, ListItem, Toolbar, Typography, Fab } from "@mui/material"
+import { Button, Box, List, ListItem, Typography, Fab } from "@mui/material"
 import { Sidebar } from "../Sidebar/Sidebar"
 import { CardContainer } from "../Card/CardContainer";
 
@@ -15,9 +14,6 @@ export const Dashboard = (props) => {
 
     const handleSetActive = (e) => {
         const idx = e ? e.target.value : 0;
-        console.log(deckData.decks[idx])
-
-
         setActiveDeck({...deckData.decks[idx]});
     }
 

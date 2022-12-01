@@ -1,10 +1,12 @@
+import { useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+
 import { AppBar, Box, Button, IconButton, Menu, MenuItem, Toolbar, Typography } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
-import { useNavigate } from "react-router-dom";
-import { useState } from 'react';
+import HomeIcon from '@mui/icons-material/Home';
 
 export const Navbar = (props) => {
-    const { setToken, clearToken } = props;
+    const { token, setToken, clearToken } = props;
     const navigate = useNavigate()
 
     const [anchorElNav, setAnchorElNav] = useState(null);
@@ -28,7 +30,9 @@ export const Navbar = (props) => {
 
     const handleNavigate = (e) => {
         console.log(e)
-        const page = e.target.id;
+        const text = e.target.textContent;
+        const page = text.split(' ')[0].toLowerCase();
+        console.log(page)
         const url = '/' + page;
         navigate(url);
     }
@@ -40,47 +44,61 @@ export const Navbar = (props) => {
             sx={{zIndex: (theme) => theme.zIndex.drawer + 1}}
             >
             <Toolbar>
-              <Typography>Navbar!</Typography>
+                <Link to={'/'}>
+                    <HomeIcon />
+                </Link>
+                {token && (
+                    <>
 
-              {/* *** DASHBOARD *** */}
-              <Box sx={{
-                display: { xs: 'none', md: 'flex'}
-              }}>
-                <Button color='secondary' variant='contained' onClick={handleLogout}>Logout</Button>            
-              </Box>
+                        {/* *** DASHBOARD *** */}
+                        <Box sx={{
+                            display: { xs: 'none', md: 'flex'},
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            width: '100%',
+                            
+                        }}>
+                            <Button color='secondary' variant='contained' onClick={handleNavigate}>Create Deck</Button>            
+                            <Button color='secondary' variant='contained' onClick={handleNavigate}>Edit Decks</Button>            
+                            <Button color='secondary' variant='contained' onClick={handleLogout}>Logout</Button>            
+                        </Box>
 
-              {/* *** MOBILE *** */}
-              <Box sx={{
-                display: { xs: 'flex', md: 'none' }
-              }}>
-                <IconButton
-                    color='inherit'
-                    size='large'
-                    onClick={handleOpenNavMenu}
-                >
-                    <MenuIcon />
-                </IconButton>
-                <Menu
-                    sx={{
-                        display: { xs: 'block', md: 'none' }
-                    }}
-                    anchorEl={anchorElNav}
-                    keepMounted
-                    open={Boolean(anchorElNav)}
-                    onClose={handleCloseNavMenu}
-                >
-                    <MenuItem key='logout' onClick={(e)=>handleMenuItemClick(e, handleLogout)}>
-                        <Typography>Logout</Typography>
-                    </MenuItem>
-                    <MenuItem onClick={(e)=>handleMenuItemClick(e, handleNavigate)}>
-                        <Typography id='create'>Create Deck</Typography>
-                    </MenuItem>
-                    <MenuItem onClick={(e)=>handleMenuItemClick(e, handleNavigate)}>
-                        <Typography id='edit'>Edit Deck</Typography>
-                    </MenuItem>
-                </Menu>
-              </Box>
-            </Toolbar>
+                        {/* *** MOBILE *** */}
+                        <Box sx={{
+                            width: '100%',
+                            display: { xs: 'flex', md: 'none' },
+                            justifyContent: 'flex-end'
+                        }}>
+                            <IconButton
+                                color='inherit'
+                                size='large'
+                                onClick={handleOpenNavMenu}
+                            >
+                                <MenuIcon />
+                            </IconButton>
+                            <Menu
+                                sx={{
+                                    display: { xs: 'block', md: 'none' }
+                                }}
+                                anchorEl={anchorElNav}
+                                keepMounted
+                                open={Boolean(anchorElNav)}
+                                onClose={handleCloseNavMenu}
+                            >
+                                <MenuItem key='logout' onClick={(e)=>handleMenuItemClick(e, handleLogout)}>
+                                    <Typography>Logout</Typography>
+                                </MenuItem>
+                                <MenuItem onClick={(e)=>handleMenuItemClick(e, handleNavigate)}>
+                                    <Typography>Create Deck</Typography>
+                                </MenuItem>
+                                <MenuItem onClick={(e)=>handleMenuItemClick(e, handleNavigate)}>
+                                    <Typography>Edit Decks</Typography>
+                                </MenuItem>
+                            </Menu>
+                        </Box>
+                    </>
+                    )}
+                </Toolbar>
         </AppBar>
     )
 }

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Box, Drawer, Toolbar, Typography } from "@mui/material";
 
 export const Sidebar = (props) => {

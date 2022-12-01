@@ -2,7 +2,6 @@ module.exports =
 {
     "decks": [
         {
-            "_id": 0,
             "title": "array methods",
             "desc": "methods on javascript array prototype",
             "cards": [
@@ -48,7 +47,6 @@ module.exports =
                 }
             ]
         },{
-            "_id": 1,
             "title": "string methods",
             "desc":"methods on javascript string prototype",
             "cards": [

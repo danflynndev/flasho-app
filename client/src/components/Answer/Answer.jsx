@@ -1,7 +1,6 @@
 import { ListItem } from "@mui/material"
 import { useState } from "react"
 
-
 export const Answer = (props) => {
     const [isRevealed, setIsRevealed] = useState(false);
     const question = props.set.q;

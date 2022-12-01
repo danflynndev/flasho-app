@@ -22,11 +22,10 @@ module.exports = {
                 return res.status(400).json({ message: 'Invalid credentials' });
             }
 
-            const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, JWT_SECRET, { expiresIn: '1h'});
+            const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, JWT_SECRET, { expiresIn: '3h'});
             const result = {oldUser, token}
-            // console.log(token)
-            // res.status(200).json({ result: oldUser, token });
-            res.status(200).json({token: token})// for development
+
+            res.status(200).json({token: token})
 
         } catch (err) {
             res.status(500).json({ message: 'Something went wrong' });

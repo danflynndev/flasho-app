@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
-import { Button, Fab, Paper, TextField, Typography } from "@mui/material"
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import useToken from "../../hooks/useToken";
+
+import { Button, Fab, Stack, TextField, Typography } from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
-import { Stack } from "@mui/system"
+
 import { EditCard } from "./EditCard";
 import { EditQuestion } from "./EditQuestion";
-import useToken from "../../hooks/useToken";
-import { useLocation } from "react-router-dom";
+
 
 // factory functions required here to avoid pass-by-reference issues with the objects :)
 const blankQAs = () => {
@@ -18,7 +20,6 @@ const blankQAs = () => {
 const blankCard = () => {
     return {
         title: '',
-        desc: '',
         qas: [blankQAs()]
     }
 }
@@ -26,21 +27,20 @@ const blankCard = () => {
 export const Editor = (props) => {
 
     const { user, mode } = props;
+    const navigate = useNavigate();
     const location = useLocation();
-    const deck = location.state.deck;
 
     const { token } = useToken();
 
-    const [form, setForm] = useState({
-        title: '',
-        cards: [blankCard()]
-    });
-
-    useEffect(() => {
-        if (mode === 'edit') {
-            setForm(deck)
+    const [form, setForm] = useState(mode === 'create' ? 
+        {
+            title: '',
+            desc: '',
+            cards: [blankCard()]
+        } : {
+            ...location.state
         }
-    }, [deck])
+    );
 
     const addCard = () => {
         const data = [...form.cards, blankCard()]
@@ -50,6 +50,8 @@ export const Editor = (props) => {
     const removeCard = (idx) => {
         const data = [...form.cards];
         data.splice(idx, 1);
+        console.log(idx, 'idx')
+        console.log(data, 'data')
         setForm({...form, cards: data});
     }
 
@@ -91,7 +93,8 @@ export const Editor = (props) => {
             })
         })
         console.log(form)
-        const result = await fetch(`/deck/create/${user.id}`,{
+        // mode is 'create' insert new record. 'update' ditto
+        await fetch(`/deck/${mode}/${user.id}`,{
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
@@ -99,8 +102,10 @@ export const Editor = (props) => {
             },
             body: JSON.stringify(form)
         })
+        .then(res => navigate('/'));
     }
 
+    
     return (
         <>
             <Typography>Editor!</Typography>
@@ -121,12 +126,12 @@ export const Editor = (props) => {
                 <Stack spacing={2}>
                     {form.cards.map((card, idx)=> (
                         <EditCard
-                        key={idx}
-                        card={card}
-                        handleChange={handleChangeCard}
-                        idx={idx}
+                            key={idx}
+                            card={card}
+                            handleChange={handleChangeCard}
+                            idx={idx}
                         >
-                            <Fab size='small' onClick={(idx)=>removeCard(idx)}>
+                            <Fab size='small' onClick={()=>removeCard(idx)}>
                                 <CloseIcon />
                             </Fab>
                             <Stack spacing={1}>
@@ -146,7 +151,6 @@ export const Editor = (props) => {
                         </EditCard>
                     ))}
                     <Button type='submit'>submit</Button>
-
                 </Stack>
             </form>
         </>

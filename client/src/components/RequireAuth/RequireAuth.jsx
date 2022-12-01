@@ -1,10 +1,9 @@
 import { Navigate, useLocation } from "react-router-dom";
 import jwt_decode from "jwt-decode";
-import { useEffect, useState, cloneElement } from "react";
-
+import { cloneElement } from "react";
 
 export const RequireAuth = props => {
-    const { children, token } = props;
+    const { children, token, clearToken } = props;
     const location = useLocation();
     
     let user = {
@@ -16,15 +15,22 @@ export const RequireAuth = props => {
     let authed = false;
 
     try {
+        console.log(token)
         user = jwt_decode(token)
-        // jwt_decode(token)
-        authed = true;
+        const isExpired = (user.exp * 1000) < Date.now();
+        console.log(isExpired, user.exp*1000, Date.now())
+        if (isExpired) {
+            clearToken();
+            authed = false;
+        } else {
+            authed = true;
+        }
     } catch (err) {
         console.log(err)
         authed = false;
     }
+
     
-    console.log(authed)
     return authed ? (
         cloneElement(children, { user })
     ) : (
