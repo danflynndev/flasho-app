@@ -1,8 +1,7 @@
-import './App.css';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import useToken from './hooks/useToken';
 
-import { Container, CssBaseline, ThemeProvider, Toolbar } from '@mui/material';
+import { Box, CssBaseline, ThemeProvider, Toolbar } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 import { baseTheme } from './theme';
 
@@ -12,6 +11,7 @@ import { Editor } from './components/Editor/Editor';
 import { Login } from './components/Login/Login';
 import { RequireAuth } from './components/RequireAuth/RequireAuth';
 import { SelectDecks } from './components/Editor/SelectDecks';
+import svgBkg from './assets/moroccan_bkg.svg';
 
 function App() {
 
@@ -24,10 +24,13 @@ function App() {
       <ThemeProvider theme={theme} >
         <CssBaseline>
           <Navbar token={token} setToken={setToken} clearToken={clearToken} />
-          <Container sx={{
-
-       
+          <Box sx={{
+            px: 0,
+            py: 3,
+            minHeight: '100vh',
+            backgroundImage: `url(${svgBkg})`
           }}>
+
             <Toolbar />
             <Routes>
               <Route path="/" exact element={!token ? <Login setToken={setToken} /> : <Navigate to='/dashboard' replace/>} />
@@ -52,7 +55,7 @@ function App() {
                 </RequireAuth>
               } />
             </Routes>
-          </Container>
+          </Box>
         </CssBaseline>
       </ThemeProvider>
     </BrowserRouter>

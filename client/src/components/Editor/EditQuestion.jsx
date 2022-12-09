@@ -1,27 +1,33 @@
-import { Grid, TextField } from "@mui/material"
-import CloseIcon  from "@mui/icons-material/Close";
-import AddIcon from '@mui/icons-material/Add';
-
+import { Divider, Grid, Stack, TextField } from "@mui/material"
+import BackspaceOutlinedIcon from '@mui/icons-material/BackspaceOutlined';
 
 export const EditQuestion = (props) => {
-    const { set, addSet, removeSet, idx, cardIdx, handleChange } = props;
+    const { set, removeSet, idx, cardIdx, handleChange } = props;
 
     return (
-        <Grid>
-            <TextField 
-                label='Question'
-                name='q'
-                onChange={(e)=>handleChange(e, idx, cardIdx)}
-                value={set.q}
-            />
-            <TextField
-                label='Answer'
-                name='a'
-                onChange={(e)=>handleChange(e, idx, cardIdx)}
-                value={set.a}
-            />
-            <AddIcon onClick={()=>addSet(cardIdx)} />
-            <CloseIcon onClick={()=>removeSet(idx, cardIdx)}/>
+        <Grid container sx={{mb: 1}}>
+            <Grid item xs={11}>
+                <Stack spacing={1}>
+                    <TextField 
+                        label='Question'
+                        name='q'
+                        onChange={(e)=>handleChange(e, idx, cardIdx)}
+                        value={set.q}
+                    />
+                    <TextField
+                        label='Answer'
+                        name='a'
+                        onChange={(e)=>handleChange(e, idx, cardIdx)}
+                        value={set.a}
+                    />
+                    <Divider />
+                </Stack>
+            </Grid>
+            <Grid item xs={1}>
+                <BackspaceOutlinedIcon onClick={()=>removeSet(idx, cardIdx)}
+                    sx={{ ml: 1}}
+                />
+            </Grid>
         </Grid>
     )
 }

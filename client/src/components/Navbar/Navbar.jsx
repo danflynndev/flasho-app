@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import { AppBar, Box, Button, IconButton, Menu, MenuItem, Toolbar, Typography } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
-import HomeIcon from '@mui/icons-material/Home';
 
 export const Navbar = (props) => {
     const { token, setToken, clearToken } = props;
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const [anchorElNav, setAnchorElNav] = useState(null);
 
@@ -25,11 +25,13 @@ export const Navbar = (props) => {
     }
 
     const handleLogout = () => {
+        if (location.state?.path) {
+            location.state.path = '/';
+        }
         clearToken();
     }
 
     const handleNavigate = (e) => {
-        console.log(e)
         const text = e.target.textContent;
         const page = text.split(' ')[0].toLowerCase();
         console.log(page)
@@ -41,26 +43,36 @@ export const Navbar = (props) => {
     return (
         <AppBar
             position='fixed'
-            sx={{zIndex: (theme) => theme.zIndex.drawer + 1}}
-            >
+            sx={{
+                bgcolor: 'primary.dark',
+                zIndex: (theme) => theme.zIndex.drawer + 1
+            }}
+        >
             <Toolbar>
-                <Link to={'/'}>
-                    <HomeIcon />
+                <Link to={'/'} 
+                    style={{
+                        textDecoration: 'none',
+                    }}
+                >
+                    {/* <HomeIcon /> */}
+                    <Typography variant='h4' sx={{
+                        color: '#fff', 
+                        fontFamily: "'Fondamento', 'Roboto','Helvetica','Arial',sans-serif",
+                    }}>Flashy</Typography>
                 </Link>
                 {token && (
                     <>
-
                         {/* *** DASHBOARD *** */}
                         <Box sx={{
-                            display: { xs: 'none', md: 'flex'},
-                            justifyContent: 'center',
-                            alignItems: 'center',
                             width: '100%',
-                            
+                            display: { xs: 'none', md: 'flex'},
+                            justifyContent: 'end',
+                            alignItems: 'center',
+                            gap: 3,
                         }}>
-                            <Button color='secondary' variant='contained' onClick={handleNavigate}>Create Deck</Button>            
-                            <Button color='secondary' variant='contained' onClick={handleNavigate}>Edit Decks</Button>            
-                            <Button color='secondary' variant='contained' onClick={handleLogout}>Logout</Button>            
+                            <Button variant='contained' onClick={handleNavigate}>Create Deck</Button>            
+                            <Button variant='contained' onClick={handleNavigate}>Edit Decks</Button>            
+                            <Button variant='contained' onClick={handleLogout}>Logout</Button>            
                         </Box>
 
                         {/* *** MOBILE *** */}
@@ -85,14 +97,14 @@ export const Navbar = (props) => {
                                 open={Boolean(anchorElNav)}
                                 onClose={handleCloseNavMenu}
                             >
-                                <MenuItem key='logout' onClick={(e)=>handleMenuItemClick(e, handleLogout)}>
-                                    <Typography>Logout</Typography>
-                                </MenuItem>
                                 <MenuItem onClick={(e)=>handleMenuItemClick(e, handleNavigate)}>
                                     <Typography>Create Deck</Typography>
                                 </MenuItem>
                                 <MenuItem onClick={(e)=>handleMenuItemClick(e, handleNavigate)}>
                                     <Typography>Edit Decks</Typography>
+                                </MenuItem>
+                                <MenuItem key='logout' onClick={(e)=>handleMenuItemClick(e, handleLogout)}>
+                                    <Typography>Logout</Typography>
                                 </MenuItem>
                             </Menu>
                         </Box>

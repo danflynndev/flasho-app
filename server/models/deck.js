@@ -14,7 +14,7 @@ const QASchema = new Schema({
     a: {
         type: String,
         required: true,
-        maxLength: 140
+        maxLength: 240
     }
 })
 

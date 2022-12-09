@@ -4,7 +4,7 @@ import { cloneElement } from "react";
 
 export const RequireAuth = props => {
     const { children, token, clearToken } = props;
-    const location = useLocation();
+    // const location = useLocation();
     
     let user = {
         email: '',
@@ -15,10 +15,8 @@ export const RequireAuth = props => {
     let authed = false;
 
     try {
-        console.log(token)
         user = jwt_decode(token)
         const isExpired = (user.exp * 1000) < Date.now();
-        console.log(isExpired, user.exp*1000, Date.now())
         if (isExpired) {
             clearToken();
             authed = false;
@@ -34,6 +32,9 @@ export const RequireAuth = props => {
     return authed ? (
         cloneElement(children, { user })
     ) : (
-        <Navigate to="/" replace state={{ path: location.pathname }} />
+        <Navigate to="/" replace />
     )
 }
+
+// this can be used to preserve the users navigation in the event of a timeout. not using here due to small size of app, general irrelevance.
+/* <Navigate to="/" replace state={{ path: location.pathname }} /> */

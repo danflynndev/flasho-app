@@ -7,8 +7,12 @@ module.exports = {
         const userId = req.params.id;
 
         try {
-            const query = { userId: ObjectId(userId)}
+            const query = { user_id: ObjectId(userId)}
+            console.log(query)
             const userDecks = await DeckModel.findOne(query);
+            console.log(userId, userDecks.user_id)
+            console.log(userId === userDecks.user_id)
+            console.log(ObjectId(userId) === userDecks.user_id)
             // console.log(userDecks)
             res.status(200).json(userDecks);
         } catch (err) {
@@ -20,7 +24,7 @@ module.exports = {
         const userId = req.params.id;
         const { desc, title, cards } = req.body
         try {
-            const query = { userId: ObjectId(userId)};
+            const query = { user_id: ObjectId(userId)};
             const operation = { 
                 $push: { 
                     decks: { 

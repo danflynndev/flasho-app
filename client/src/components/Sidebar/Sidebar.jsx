@@ -18,8 +18,15 @@ export const Sidebar = (props) => {
                 open
             >
                 <Toolbar />
-                <Box sx={{ overflow: 'auto' }}>
-                    <Typography>Sidebar!</Typography>
+                <Box sx={{ 
+                    overflow: 'auto',
+                }}>
+                    <Typography align='center' component='h3' variant='h5' 
+                        sx={{
+                            pt: 3,
+                            pb: 1,
+                            borderBottom: '1px solid lightgrey'
+                        }} >Study Topics</Typography>
                     {props.children}
                 </Box>
             </Drawer>
@@ -27,6 +34,7 @@ export const Sidebar = (props) => {
             {/* *** MOBILE *** */}
             <Drawer
                 variant='temporary'
+                keepMounted
                 open={mobileOpen}
                 onClose={handleDrawerToggle}
                 sx={{
@@ -37,7 +45,12 @@ export const Sidebar = (props) => {
             >
                 <Toolbar />
                 <Box sx={{ overflow: 'auto' }}>
-                    <Typography>Sidebar!</Typography>
+                    <Typography align='center' component='h3' variant='h5' 
+                            sx={{
+                                pt: 3,
+                                pb: 1,
+                                borderBottom: '1px solid lightgrey'
+                            }} >Study Topics</Typography>
                     {props.children}
                 </Box>
             </Drawer>

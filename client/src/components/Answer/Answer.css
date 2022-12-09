@@ -1,0 +1,10 @@
+.answer {
+    transform: rotateY(0deg);
+    transition: transform .15s;
+}
+
+.answer.transition {
+    transform: rotateY(90deg);
+    transition: transform .15s linear;
+}
+

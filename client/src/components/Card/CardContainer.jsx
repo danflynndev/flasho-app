@@ -22,6 +22,7 @@ export const CardContainer = (props) => {
 
     return (
         <Card 
+            deckSize={activeDeck.cards.length}
             card={card} 
             handleCardChange={handleCardChange}
         />

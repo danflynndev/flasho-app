@@ -2,11 +2,13 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useToken from "../../hooks/useToken";
 
-import { Button, Fab, Stack, TextField, Typography } from "@mui/material"
-import CloseIcon from '@mui/icons-material/Close';
+import { Button, Fab, Paper, Stack, TextField, Typography } from "@mui/material"
+
+import PostAddIcon from '@mui/icons-material/PostAdd';
 
 import { EditCard } from "./EditCard";
 import { EditQuestion } from "./EditQuestion";
+import { Box } from "@mui/system";
 
 
 // factory functions required here to avoid pass-by-reference issues with the objects :)
@@ -107,33 +109,66 @@ export const Editor = (props) => {
 
     
     return (
-        <>
-            <Typography>Editor!</Typography>
-            <Button onClick={addCard}>Add Card</Button>
+        <Paper elevation={3} sx={{
+            mx: { xs: 1, sm: 'auto'},
+            p: 3,
+            width: { xs: 'auto', sm: '75%'},
+            // display: 'flex',
+            // flexDirection: 'column',
+            // alignItems: 'center',
+            // gap: 1
+        }}>
+            <Typography align='center' component='h1' variant='h4' sx={{ mb: 2}}>Deck Editor</Typography>
+            {/* *** DESKTOP ICON *** */}
+            <Fab 
+                variant='extended'
+                onClick={addCard}
+                sx={{
+                    display: { xs: 'none', sm: 'flex'},
+                    position: 'fixed',
+                    right: 16,
+                    top: 95
+                }}
+            >
+                <PostAddIcon />
+                Add Card
+            </Fab>
+            {/* *** MOBILE ICON *** */}
+            <Fab 
+                onClick={addCard}
+                size='small'
+                sx={{
+                    display: { xs: 'flex', sm: 'none'},
+                    position: 'fixed',
+                    right: 16,
+                    top: 75
+                }}
+            >
+                <PostAddIcon />
+            </Fab>
             <form onSubmit={onSubmit}>
-                <TextField
-                    label='Deck Name'
-                    name='title'
-                    onChange={handleChangeDeck}
-                    value={form.title}
-                />
-                <TextField
-                    label='Description'
-                    name='desc'
-                    onChange={handleChangeDeck}
-                    value={form.desc}
-                />
                 <Stack spacing={2}>
+                    <TextField
+                        label='Deck Name'
+                        name='title'
+                        onChange={handleChangeDeck}
+                        value={form.title}
+                    />
+                    <TextField
+                        label='Description'
+                        name='desc'
+                        onChange={handleChangeDeck}
+                        value={form.desc}
+                    />
                     {form.cards.map((card, idx)=> (
                         <EditCard
                             key={idx}
                             card={card}
                             handleChange={handleChangeCard}
+                            removeCard={removeCard}
+                            addSet={addSet}
                             idx={idx}
                         >
-                            <Fab size='small' onClick={()=>removeCard(idx)}>
-                                <CloseIcon />
-                            </Fab>
                             <Stack spacing={1}>
                                 {card.qas.map((set, setIdx) => (
                                     <EditQuestion
@@ -144,15 +179,15 @@ export const Editor = (props) => {
                                         handleChange={handleChangeSet}
                                         idx={setIdx}
                                         cardIdx={idx}
-                                    >
-                                    </EditQuestion>
+                                    />
                                 ))}
                             </Stack>
                         </EditCard>
                     ))}
-                    <Button type='submit'>submit</Button>
+                    <Button variant='contained' type='submit'>submit</Button>
+                    <Button onClick={()=>navigate('/')}>Cancel</Button>
                 </Stack>
             </form>
-        </>
+        </Paper>
     )
 }

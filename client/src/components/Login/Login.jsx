@@ -1,18 +1,22 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { Button, Container, Paper, TextField } from "@mui/material";
+import { Button, Container, Grid, Paper, TextField, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
+
+const initialState = {
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+}
 
 export const Login = (props) => {
     const navigate = useNavigate();
     const { state } = useLocation();
     const { setToken } = props;
-    const [form, setForm] = useState({
-        name: '',
-        email: '',
-        password: ''
-    })
+    const [isSignup, setIsSignup] = useState(false)
+    const [form, setForm] = useState(initialState)
 
     // enables one-click guest login
     useEffect(() => {
@@ -27,7 +31,7 @@ export const Login = (props) => {
         setForm({...form, [e.target.name]: value});
     }
 
-    const handleClickGuest = async (e) => {
+    const handleClickGuest = (e) => {
         e.preventDefault();
         setForm({
             name: 'Guest',
@@ -39,8 +43,8 @@ export const Login = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('submit fired', form)
-        await fetch('/user/signin', {
+        const mode = isSignup ? 'signup' : 'signin';
+        await fetch(`/user/${mode}`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
@@ -52,6 +56,11 @@ export const Login = (props) => {
         .then(()=> navigate(state?.path || '/dashboard'))
     }
 
+    const switchMode = () => {
+        setForm(initialState)
+        setIsSignup((prevIsSignup) =>  !prevIsSignup)
+    }
+
     return (
         <Container 
             component='main'
@@ -59,38 +68,66 @@ export const Login = (props) => {
                 display: 'flex',
                 justifyContent:'center',
                 alignItems: 'center',
-                height: '80vh',
             }}
         >
-            <Paper elevation={5}>
+            <Paper 
+                elevation={5}
+                sx={{
+                    width: 800,
+                    padding: 3
+                }}
+            >
                 <form onSubmit={handleSubmit}>
-                    <Stack spacing={2}>
-                        <TextField
-                            id='name'
-                            label='First Name'
-                            name='name'
-                            onChange={handleChange}
-                            required
-                            value={form.name}
-                        />
+                    <Stack 
+                        spacing={2}
+                        sx={{
+                            alignItems: 'center'
+                        }}
+                    >
+                        <Typography component='h1' variant='h4'>{ isSignup ? 'Sign Up' : 'Sign In' }</Typography>
+                        { isSignup && (
+                            <TextField
+                                fullWidth
+                                label='First Name'
+                                name='name'
+                                onChange={handleChange}
+                                required
+                                type='text'
+                                value={form.name}
+                            />
+                        )}
                         <TextField 
-                            id='email'
+                            fullWidth
                             label='Email'
                             name='email'
                             onChange={handleChange}
                             required
+                            type='text'
                             value={form.email}
                         />
                         <TextField
-                            id='password'
+                            fullWidth
                             label='Password'
                             name='password'
                             onChange={handleChange}
                             required
+                            type='password'
                             value={form.password}
                         />
-                        <Button variant='outlined' type='submit'>Sign-In</Button>
-                        <Button variant='outlined' onClick={handleClickGuest} value='guest'>Use Guest Credentials</Button>
+                        { isSignup && (
+                            <TextField
+                                fullWidth
+                                label='Confirm password'
+                                name='confirmPassword'
+                                onChange={handleChange}
+                                required
+                                type='password'
+                                value={form.confirmPassword}
+                            />
+                        )}
+                        <Button variant='contained' type='submit' fullWidth>{ isSignup ? 'Sign Up' : 'Sign In' }</Button>
+                        <Button onClick={handleClickGuest} value='guest' size='small' fullWidth>Guest Sign in</Button>
+                        <Button variant='text' color='primary' onClick={switchMode} size='small'>{ isSignup ? "I already have an account" : "Don't have an account?"  }</Button>
                     </Stack>
                 </form>
             </Paper>

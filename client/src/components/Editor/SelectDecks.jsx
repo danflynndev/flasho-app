@@ -78,15 +78,19 @@ export const SelectDecks = (props) => {
     ) : (
         <Box sx={{
             display: 'flex',
-            flexWrap: 'wrap'
+            flexDirection: { xs: 'column', sm: 'row' },
+            flexWrap: { xs: 'nowrap', sm: 'wrap' },
         }}>
+            
             {userDecks.map(deck => (
                 <Card
                     key={deck._id} 
                     variant='outlined'
                     sx={{
+                        boxShadow: 3,
                         mx: 2,
-                        minWidth: 350,
+                        my: 1,
+                        minWidth: { xs: 'auto', sm: 350 },
                         maxWidth: 350
                     }}
                 >
@@ -96,7 +100,7 @@ export const SelectDecks = (props) => {
                     </CardContent>
                     <CardActions>
                         <Button value={deck._id} onClick={(e)=>handleEditClick(e, deck)}>Edit</Button>
-                        <Button value={deck._id} onClick={()=>handleModalOpen(deck)}>Delete</Button>
+                        <Button color='error' value={deck._id} onClick={()=>handleModalOpen(deck)}>Delete</Button>
                     </CardActions>
                 </Card>
             ))}
