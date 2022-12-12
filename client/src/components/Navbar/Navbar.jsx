@@ -58,7 +58,7 @@ export const Navbar = (props) => {
                     <Typography variant='h4' sx={{
                         color: '#fff', 
                         fontFamily: "'Fondamento', 'Roboto','Helvetica','Arial',sans-serif",
-                    }}>Flashy</Typography>
+                    }}>Flasho</Typography>
                 </Link>
                 {token && (
                     <>
