@@ -34,7 +34,6 @@ export const Navbar = (props) => {
     const handleNavigate = (e) => {
         const text = e.target.textContent;
         const page = text.split(' ')[0].toLowerCase();
-        console.log(page)
         const url = '/' + page;
         navigate(url);
     }

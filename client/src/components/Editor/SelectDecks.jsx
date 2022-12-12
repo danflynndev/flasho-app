@@ -32,7 +32,6 @@ export const SelectDecks = (props) => {
     }, [user.id])
 
     const handleEditClick = async (e, deck) => {
-        console.log(e.target, deck)
         navigate(`/edit/${e.target.value}`, {state: deck}, {replace: false} )
     }
 
@@ -52,9 +51,8 @@ export const SelectDecks = (props) => {
             },
             body: JSON.stringify(body)
         })
-        .then(res => {console.log(res); return res.json()})
+        .then(res => res.json())
         .then(data => {
-            console.log(data)
             setUserDecks([...data.decks])
             setIsLoading(false)
         })
@@ -65,7 +63,6 @@ export const SelectDecks = (props) => {
     const [toDelete, setToDelete] = useState({deckId: '', deckName: ''})
     const handleModalOpen = (deck) => {
         setToDelete({deckId: deck?._id, deckName: deck?.title})
-        console.log(toDelete)
         setModalOpen(true);
     }
     const handleModalClose = () => {

@@ -8,12 +8,7 @@ module.exports = {
 
         try {
             const query = { user_id: ObjectId(userId)}
-            console.log(query)
             const userDecks = await DeckModel.findOne(query);
-            console.log(userId, userDecks.user_id)
-            console.log(userId === userDecks.user_id)
-            console.log(ObjectId(userId) === userDecks.user_id)
-            // console.log(userDecks)
             res.status(200).json(userDecks);
         } catch (err) {
             res.status(500).json({ message: 'something went wrong' })
@@ -46,7 +41,6 @@ module.exports = {
         const userId = req.params.id;
         try {
             const update = req.body;
-            console.log(update)
             const query = {'decks._id': ObjectId(update._id)};
             const operation = {
                 $set: {
@@ -56,7 +50,6 @@ module.exports = {
                 }
             }
             const result = await DeckModel.findOneAndUpdate(query, operation, {new: true})
-            console.log(result)
             res.status(201).json({ message: 'Successfully Updated'})
         } catch (err) {
             res.status(500).json({ message: 'server error' })
@@ -65,7 +58,6 @@ module.exports = {
 
     deleteDeck: async (req, res) => {
         const { userId, deckId } = req.body;
-        console.log('uid:', userId, 'did:', deckId)
         try {
             const query = { userId: ObjectId(userId)}
             const operation = {
@@ -76,7 +68,6 @@ module.exports = {
                 }
             }
             const result = await DeckModel.findOneAndUpdate(query, operation, {new: true});
-            console.log(result)
             res.status(201).json(result)
         } catch (err) {
             res.status(500).json({ message: 'server error' })

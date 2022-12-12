@@ -15,7 +15,6 @@ export const Dashboard = (props) => {
 
     const handleSetActive = (e) => {
         const idx = e ? e.target.value : 0;
-        console.log(e.target)
         setActiveDeck({...deckData.decks[idx]});
         setMobileOpen(false);
     }

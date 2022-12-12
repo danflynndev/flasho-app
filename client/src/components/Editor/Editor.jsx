@@ -52,8 +52,6 @@ export const Editor = (props) => {
     const removeCard = (idx) => {
         const data = [...form.cards];
         data.splice(idx, 1);
-        console.log(idx, 'idx')
-        console.log(data, 'data')
         setForm({...form, cards: data});
     }
 
@@ -94,7 +92,6 @@ export const Editor = (props) => {
                 set._id = setIdx
             })
         })
-        console.log(form)
         // mode is 'create' insert new record. 'update' ditto
         await fetch(`/deck/${mode}/${user.id}`,{
             method: 'post',

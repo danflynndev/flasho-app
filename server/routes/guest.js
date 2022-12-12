@@ -19,7 +19,6 @@ router.get('/init', async (req, res, next) => {
     try {
         const { decks } = require('../db/guest_decks');
         const guestUserId = await UserModel.findOne({ email: 'guest@gmail.com' }, { _id: 1 })
-        console.log(guestUserId)
         const guestDecks = {
             user_id: guestUserId,
             decks
