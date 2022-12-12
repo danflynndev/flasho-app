@@ -29,7 +29,7 @@ export const EditCard = (props) => {
                 </Stack>
 
                 <CloseIcon 
-                    onClick={removeCard}
+                    onClick={()=>removeCard(idx)}
                     sx={{
                         border: 2,
                         borderRadius: 1,
