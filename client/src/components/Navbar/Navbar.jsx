@@ -5,7 +5,7 @@ import { AppBar, Box, Button, IconButton, Menu, MenuItem, Toolbar, Typography } 
 import MenuIcon from '@mui/icons-material/Menu';
 
 export const Navbar = (props) => {
-    const { token, setToken, clearToken } = props;
+    const { token, clearToken } = props;
     const navigate = useNavigate();
     const location = useLocation();
 
