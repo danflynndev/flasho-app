@@ -2,10 +2,6 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const QASchema = new Schema({
-    _id: {
-        type: Number,
-        default: 0
-    },
     q: {
         type: String,
         required: true,
@@ -19,10 +15,6 @@ const QASchema = new Schema({
 })
 
 const CardSchema = new Schema({
-    _id: {
-        type: Number,
-        default: 0
-    },
     title: {
         type: String,
         required: true,

@@ -7,10 +7,8 @@ const emptyDeckData = {
         _id: '',
         title: '',
         cards: [{
-            _id: '',
             title: '',
             qas:[{
-                _id: '',
                 q: '',
                 a: ''
             }]

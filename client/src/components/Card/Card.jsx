@@ -5,7 +5,7 @@ import { Answer } from "../Answer/Answer";
 
 
 export const Card = (props) => {
-    const { card, deckSize, handleCardChange } = props;
+    const { card, cardIdx, deckSize, handleCardChange } = props;
 
     const handleNavClick = (e) => {
         handleCardChange(e.target.value);
@@ -19,7 +19,7 @@ export const Card = (props) => {
                 px: 3,
 
             }}>
-            <Typography align='right' component='aside' variant='body2' sx={{fontSize: 10, color: 'text.secondary'}}>{`${card._id + 1}/${deckSize}`}</Typography>
+            <Typography align='right' component='aside' variant='body2' sx={{fontSize: 10, color: 'text.secondary'}}>{`${cardIdx + 1}/${deckSize}`}</Typography>
             <Typography align='center' variant='h6'>{card.title}</Typography>
             <Divider />
             <List sx={{

@@ -84,13 +84,7 @@ export const Editor = (props) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        // assign _ids to everything here
-        form.cards.forEach((card, idx) => {
-            card._id = idx;
-            card.qas.forEach((set, setIdx) => {
-                set._id = setIdx
-            })
-        })
+        
         // mode is 'create' insert new record. 'update' ditto
         await fetch(`/deck/${mode}/${user.id}`,{
             method: 'post',
