@@ -8,6 +8,8 @@ import { baseTheme } from './theme';
 import { Navbar } from './components/Navbar/Navbar';
 import { DashboardContainer } from './components/Dashboard/DashboardContainer';
 import { Editor } from './components/Editor/Editor';
+import { EditorFilledContainer } from './components/Editor/EditorFilledContainer';
+import { EditorBlankContainer } from './components/Editor/EditorBlankContainer';
 import { Login } from './components/Login/Login';
 import { RequireAuth } from './components/RequireAuth/RequireAuth';
 import { SelectDecks } from './components/Editor/SelectDecks';
@@ -41,12 +43,12 @@ function App() {
               } />
               <Route path="/create" exact element={
                 <RequireAuth token={token} clearToken={clearToken}>
-                  <Editor mode="create" />
+                  <EditorBlankContainer />
                 </RequireAuth>
               } />
-              <Route path="/edit/:id" element={
-                <RequireAuth token={token}>
-                  <Editor mode="update" clearToken={clearToken}/>
+              <Route path="/edit/:deckId" element={
+                <RequireAuth token={token} clearToken={clearToken}>
+                  <EditorFilledContainer />
                 </RequireAuth>
               } />
               <Route path="/edit" exact element={

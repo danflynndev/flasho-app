@@ -56,8 +56,8 @@ Having studied web development for the past two years, I am proud to present thi
 
 ### Known Issues
 
-- 'Source of truth' concerns regarding the useToken hook and Editor component. Can cause issues in rendering certain routes.
+- 'Source of truth' concerns regarding the useToken hook ~~and Editor component.~~ Can cause issues in rendering certain routes.
     - token should be manually decoded when needed, not held as a variable in memory. Supply module functions for this purpose
-    - Editor should fetch its own data on render, not passed through as state. (ie. it should have what it needs to render independently)
-- Setting `_id` fields manually in the data model and relying on a sequential order during consumption. Should be removed entirely and decoupled from presentation
+    - ~~Editor should fetch its own data on render, not passed through as state. (ie. it should have what it needs to render independently)~~ Fixed!
+- ~~Setting `_id` fields manually in the data model and relying on a sequential order during consumption. Should be removed entirely and decoupled from presentation~~ Fixed!
 - Styling code mixed with functional code. Needs to be imported as classes or split into style components and use composition.

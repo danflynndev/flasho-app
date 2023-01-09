@@ -15,6 +15,21 @@ module.exports = {
         }
     },
 
+    getDeckById: async (req, res) => {
+        const userId = req.params.userId;
+        const deckId = req.params.deckId;
+
+        try {
+            const query = { user_id: ObjectId(userId) }
+            const projection = { decks: { $elemMatch: { _id: ObjectId(deckId)}}}
+            const deck = await DeckModel.findOne(query, projection)
+            console.log(deck)
+            res.status(200).json(deck);
+        } catch (err) {
+            res.status(500).json({ message: 'something went wrong' })
+        }
+    },
+
     createDeck: async (req, res) => {
         const userId = req.params.id;
         const { desc, title, cards } = req.body

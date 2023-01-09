@@ -27,21 +27,12 @@ const blankCard = () => {
 
 export const Editor = (props) => {
 
-    const { user, mode } = props;
+    const { user, deck, mode } = props;
     const navigate = useNavigate();
-    const location = useLocation();
 
     const { token } = useToken();
 
-    const [form, setForm] = useState(mode === 'create' ? 
-        {
-            title: '',
-            desc: '',
-            cards: [blankCard()]
-        } : {
-            ...location.state
-        }
-    );
+    const [form, setForm] = useState(deck);
 
     const addCard = () => {
         const data = [...form.cards, blankCard()]

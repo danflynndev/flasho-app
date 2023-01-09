@@ -31,8 +31,8 @@ export const SelectDecks = (props) => {
         .catch(console.error)
     }, [user.id])
 
-    const handleEditClick = async (e, deck) => {
-        navigate(`/edit/${e.target.value}`, {state: deck}, {replace: false} )
+    const handleEditClick = async (e) => {
+        navigate(`/edit/${e.target.value}`, {replace: false} )
     }
 
     const handleDeleteClick = async (e, deckId) => {
