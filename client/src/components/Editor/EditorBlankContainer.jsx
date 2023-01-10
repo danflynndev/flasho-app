@@ -23,6 +23,6 @@ export const EditorBlankContainer = props => {
     const [deck, setDeck] = useState({...blankDeck})
 
     return (
-        <Editor deck={deck} mode='create' />
+        <Editor deck={deck} mode='create' user={user} />
     )
 }
