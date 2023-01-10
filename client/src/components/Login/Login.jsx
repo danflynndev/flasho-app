@@ -52,7 +52,7 @@ export const Login = (props) => {
             body: JSON.stringify(form)
         })
         .then(response => response.json())
-        .then(data => {console.log(data, 'from fetch');setToken(data)})
+        .then(data => setToken(data))
         .then(()=> navigate(state?.path || '/dashboard'))
     }
 
