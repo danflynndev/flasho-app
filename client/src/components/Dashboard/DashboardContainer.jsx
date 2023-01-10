@@ -28,13 +28,13 @@ export const DashboardContainer = (props) => {
         const fetchData = async () => {
             const result = await fetch(`deck/${user.id}`)
             .then(res => res.json())
-            
+
             setDeckData(result)
             setIsLoading(false);
         }
         fetchData()
         .catch(console.error)
-    
+
     }, [user.id])
 
     return (

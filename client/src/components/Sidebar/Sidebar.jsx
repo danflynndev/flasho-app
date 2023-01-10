@@ -18,10 +18,10 @@ export const Sidebar = (props) => {
                 open
             >
                 <Toolbar />
-                <Box sx={{ 
+                <Box sx={{
                     overflow: 'auto',
                 }}>
-                    <Typography align='center' component='h3' variant='h5' 
+                    <Typography align='center' component='h3' variant='h5'
                         sx={{
                             pt: 3,
                             pb: 1,
@@ -45,7 +45,7 @@ export const Sidebar = (props) => {
             >
                 <Toolbar />
                 <Box sx={{ overflow: 'auto' }}>
-                    <Typography align='center' component='h3' variant='h5' 
+                    <Typography align='center' component='h3' variant='h5'
                             sx={{
                                 pt: 3,
                                 pb: 1,

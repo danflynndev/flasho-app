@@ -23,7 +23,7 @@ export const SelectDecks = (props) => {
         const fetchData = async () => {
             const result = await fetch(`deck/${user.id}`)
             .then(res => res.json())
-            
+
             setUserDecks([...result.decks])
             setIsLoading(false);
         }
@@ -31,8 +31,8 @@ export const SelectDecks = (props) => {
         .catch(console.error)
     }, [user.id])
 
-    const handleEditClick = async (e) => {
-        navigate(`/edit/${e.target.value}`, {replace: false} )
+    const handleEditClick = async (e, deck) => {
+        navigate(`/edit/${e.target.value}`, {state: deck}, {replace: false} )
     }
 
     const handleDeleteClick = async (e, deckId) => {
@@ -78,10 +78,10 @@ export const SelectDecks = (props) => {
             flexDirection: { xs: 'column', sm: 'row' },
             flexWrap: { xs: 'nowrap', sm: 'wrap' },
         }}>
-            
+
             {userDecks.map(deck => (
                 <Card
-                    key={deck._id} 
+                    key={deck._id}
                     variant='outlined'
                     sx={{
                         boxShadow: 3,

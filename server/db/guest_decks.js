@@ -1,4 +1,4 @@
-module.exports = 
+module.exports =
 {
     "decks": [
         {
@@ -214,7 +214,7 @@ module.exports =
                             "a": "none",
                         },{
                             "q": "Return value",
-                            "a": "A new Array iterator object of the arrays keys", 
+                            "a": "A new Array iterator object of the arrays keys",
                         }
                     ]
                 },{

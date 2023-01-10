@@ -5,7 +5,7 @@ export const EditCard = (props) => {
     const { addSet, card, children, handleChange, removeCard, idx} = props;
 
     return (
-        <Paper 
+        <Paper
             elevation={3}
             sx={{
                 p: 2,
@@ -28,7 +28,7 @@ export const EditCard = (props) => {
                     {children}
                 </Stack>
 
-                <CloseIcon 
+                <CloseIcon
                     onClick={()=>removeCard(idx)}
                     sx={{
                         border: 2,

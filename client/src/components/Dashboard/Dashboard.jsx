@@ -28,9 +28,9 @@ export const Dashboard = (props) => {
             <Box sx={{
                 display: 'flex',
             }} >
-                <Sidebar 
-                    drawerWidth={drawerWidth} 
-                    mobileOpen={mobileOpen} 
+                <Sidebar
+                    drawerWidth={drawerWidth}
+                    mobileOpen={mobileOpen}
                     handleDrawerToggle={handleDrawerToggle}
                 >
                     <List>
@@ -53,7 +53,7 @@ export const Dashboard = (props) => {
                     <Typography component='h2' variant='overline' sx={{flexGrow: 1}}>{`Currently Studying: ${activeDeck.title}`}</Typography>
                     <CardContainer activeDeck={activeDeck} />
                     <Typography component='h3' variant='body2' sx={{color: 'text.secondary', mt: 2, fontSize: 12}}>{activeDeck.desc}</Typography>
-                    <Fab 
+                    <Fab
                         size='small'
                         onClick={handleDrawerToggle}
                         sx={{

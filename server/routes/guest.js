@@ -26,7 +26,7 @@ router.get('/init', async (req, res, next) => {
         DeckModel.create(guestDecks, (err) => {
             if (err) {
                 next(err);
-            } 
+            }
             res.status(201).json({ message: 'Guest records created.' })
         });
     } catch (err) {

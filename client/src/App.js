@@ -7,7 +7,6 @@ import { baseTheme } from './theme';
 
 import { Navbar } from './components/Navbar/Navbar';
 import { DashboardContainer } from './components/Dashboard/DashboardContainer';
-import { Editor } from './components/Editor/Editor';
 import { EditorFilledContainer } from './components/Editor/EditorFilledContainer';
 import { EditorBlankContainer } from './components/Editor/EditorBlankContainer';
 import { Login } from './components/Login/Login';
@@ -67,8 +66,8 @@ function App() {
 export default App;
 
 /*
-Sources: 
-useToken hook - https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications
+Sources:
+basis for useToken hook - https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications
 auth flow inspiration - https://ui.dev/react-router-protected-routes-authentication
 
 */

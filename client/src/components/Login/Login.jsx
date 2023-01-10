@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { Button, Container, Grid, Paper, TextField, Typography } from "@mui/material";
+import { Button, Container, Paper, TextField, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 
 const initialState = {
@@ -62,7 +62,7 @@ export const Login = (props) => {
     }
 
     return (
-        <Container 
+        <Container
             component='main'
             sx={{
                 display: 'flex',
@@ -70,7 +70,7 @@ export const Login = (props) => {
                 alignItems: 'center',
             }}
         >
-            <Paper 
+            <Paper
                 elevation={5}
                 sx={{
                     width: 800,
@@ -78,7 +78,7 @@ export const Login = (props) => {
                 }}
             >
                 <form onSubmit={handleSubmit}>
-                    <Stack 
+                    <Stack
                         spacing={2}
                         sx={{
                             alignItems: 'center'
@@ -96,7 +96,7 @@ export const Login = (props) => {
                                 value={form.name}
                             />
                         )}
-                        <TextField 
+                        <TextField
                             fullWidth
                             label='Email'
                             name='email'

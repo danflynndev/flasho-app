@@ -45,4 +45,4 @@ const DeckSchema = new Schema({
     decks: [DeckObjSchema]
 });
 
-module.exports = mongoose.model('Deck', DeckSchema); 
+module.exports = mongoose.model('Deck', DeckSchema);

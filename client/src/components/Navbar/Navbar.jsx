@@ -48,14 +48,14 @@ export const Navbar = (props) => {
             }}
         >
             <Toolbar>
-                <Link to={'/'} 
+                <Link to={'/'}
                     style={{
                         textDecoration: 'none',
                     }}
                 >
                     {/* <HomeIcon /> */}
                     <Typography variant='h4' sx={{
-                        color: '#fff', 
+                        color: '#fff',
                         fontFamily: "'Fondamento', 'Roboto','Helvetica','Arial',sans-serif",
                     }}>Flasho</Typography>
                 </Link>
@@ -69,9 +69,9 @@ export const Navbar = (props) => {
                             alignItems: 'center',
                             gap: 3,
                         }}>
-                            <Button variant='contained' onClick={handleNavigate}>Create Deck</Button>            
-                            <Button variant='contained' onClick={handleNavigate}>Edit Decks</Button>            
-                            <Button variant='contained' onClick={handleLogout}>Logout</Button>            
+                            <Button variant='contained' onClick={handleNavigate}>Create Deck</Button>
+                            <Button variant='contained' onClick={handleNavigate}>Edit Decks</Button>
+                            <Button variant='contained' onClick={handleLogout}>Logout</Button>
                         </Box>
 
                         {/* *** MOBILE *** */}

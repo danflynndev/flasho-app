@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useToken from "../../hooks/useToken";
 
 import { Button, Fab, Paper, Stack, TextField, Typography } from "@mui/material"
@@ -75,7 +75,7 @@ export const Editor = (props) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        
+
         // mode is 'create' insert new record. 'update' ditto
         await fetch(`/deck/${mode}/${user.id}`,{
             method: 'post',
@@ -88,20 +88,16 @@ export const Editor = (props) => {
         .then(res => navigate('/'));
     }
 
-    
+
     return (
         <Paper elevation={3} sx={{
             mx: { xs: 1, sm: 'auto'},
             p: 3,
             width: { xs: 'auto', sm: '75%'},
-            // display: 'flex',
-            // flexDirection: 'column',
-            // alignItems: 'center',
-            // gap: 1
         }}>
             <Typography align='center' component='h1' variant='h4' sx={{ mb: 2}}>Deck Editor</Typography>
             {/* *** DESKTOP ICON *** */}
-            <Fab 
+            <Fab
                 variant='extended'
                 onClick={addCard}
                 sx={{
@@ -115,7 +111,7 @@ export const Editor = (props) => {
                 Add Card
             </Fab>
             {/* *** MOBILE ICON *** */}
-            <Fab 
+            <Fab
                 onClick={addCard}
                 size='small'
                 sx={{

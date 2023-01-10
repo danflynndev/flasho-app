@@ -3,28 +3,6 @@ import { useParams } from "react-router-dom";
 import { Editor } from "./Editor";
 import { Spinner } from "../Spinner/Spinner";
 
-
-// const blankQAs = () => {
-//     return {
-//         q: '',
-//         a: ''
-//     }
-// }
-
-// const blankCard = () => {
-//     return {
-//         title: '',
-//         qas: [blankQAs()]
-//     }
-// }
-
-// const blankDeck = () => {
-//     return {
-//         title: '',
-//         desc: '',
-//         cards: [blankCard()]
-//     }
-// }
 const blankDeck = {
     title: '',
     desc: '',
@@ -68,7 +46,7 @@ export const EditorFilledContainer = props => {
         isLoading ? (
             <Spinner />
         ) : (
-            <Editor deck={deck} mode='update' user={user} />       
+            <Editor deck={deck} mode='update' user={user} />
         )
     )
 }

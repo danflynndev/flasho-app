@@ -5,13 +5,13 @@ import { cloneElement } from "react";
 export const RequireAuth = props => {
     const { children, token, clearToken } = props;
     // const location = useLocation();
-    
+
     let user = {
         email: '',
         id: '',
         iat: 0,
         exp: 0,
-    } 
+    }
     let authed = false;
 
     try {
@@ -28,7 +28,6 @@ export const RequireAuth = props => {
         authed = false;
     }
 
-    
     return authed ? (
         cloneElement(children, { user })
     ) : (

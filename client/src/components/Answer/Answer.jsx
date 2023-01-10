@@ -1,5 +1,5 @@
-import { Box, ListItem, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Box, ListItem } from "@mui/material";
+import { useState } from "react";
 import './Answer.css';
 
 export const Answer = (props) => {
@@ -23,7 +23,7 @@ export const Answer = (props) => {
 
     return (
         <ListItem >
-            <Box 
+            <Box
                 className='answer' onClick={handleClick}
                 sx={{
                     mx: 'auto',

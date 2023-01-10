@@ -41,7 +41,7 @@ NODE_ENV=development
 
 Having studied web development for the past two years, I am proud to present this project as it represents a milestone in my progress. It synthesizes my knowledge of frameworks/libraries, their undergirding language & syntax, working with persistent data, and handling HTTP request/response cycle to asynchronously & dynamically render content. Some specific knowledge I acquired in building this project includes:
 - Writing queries for heavily nested JSON data
-- How to implement a basic auth flow and security concerns therein, as well as how and why to pass tokens to and from the server
+- How to implement a basic auth flow using JWT and security concerns therein, as well as how and why to pass tokens to and from the server
 - Working more closely with the React component lifecycle, focusing on reducing rerenders, triggering a rerender when necessary, and providing custom hooks
 - Experience in both development and production environments
 - Working with the Mongoose ODM library. Admittedly, more features from Mongoose could be utilized here to improve code legibility where applicable.

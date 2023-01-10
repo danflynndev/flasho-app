@@ -1,9 +1,6 @@
 import { Box, Button, Divider, List, Paper, Typography } from "@mui/material";
 import { Answer } from "../Answer/Answer";
 
-// NEED TO FIX CARD ID TO A DIFFERENT COUNTING METHOD AFTER SHUFFLE IS IMPLEMENTED
-
-
 export const Card = (props) => {
     const { card, cardIdx, deckSize, handleCardChange } = props;
 
@@ -17,7 +14,6 @@ export const Card = (props) => {
                 width: {xs: 'auto', sm: '80%'},
                 py: 1,
                 px: 3,
-
             }}>
             <Typography align='right' component='aside' variant='body2' sx={{fontSize: 10, color: 'text.secondary'}}>{`${cardIdx + 1}/${deckSize}`}</Typography>
             <Typography align='center' variant='h6'>{card.title}</Typography>
